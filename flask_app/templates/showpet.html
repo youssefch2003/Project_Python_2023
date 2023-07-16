@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitters Available</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">My pets</a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link "href="/sitter/new">Become a sitter</a></li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+
+    <div class="container mt-5 p-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ one_pet.name|capitalize }} details</h1>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <img class="rounded mx-auto d-block" src="{{session['image_pet']}}" alt="Profile Picture" width="90" height="90">
+                        {% if one_pet.is_dog == 0 %}
+                        <p> Type of pet: Cat</p>
+                        {% elif one_pet.is_dog == 1 %}
+                        <p class="card-text">Type of pet: Dog</p>
+                        {% endif %}
+                        <p class="card-text">Age: {{ one_pet.age }}</p>
+                        <p class="card-text">Breed: {{ one_pet.breed }}</p>
+
+                        <p class="card-text">
+                            {% if one_pet.friendly_pets == 1 %}
+                            Friendly with pets
+                            {% else %}
+                            Not friendly with pets
+                            {% endif %}
+                        </p>
+                        <p class="card-text">
+                            {% if one_pet.friendly_children == 1 %}
+                            Friendly with children
+                            {% else %}
+                            Not friendly with children
+                            {% endif %}
+                        </p>
+                        <p class="card-text">Feeding Schedule: {{ one_pet.feeding_times }}</p>
+                        <p class="card-text">Additional Notes: {{ one_pet.special_requirement }}</p>
+                        <input type="hidden" value="{{one_pet.id}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

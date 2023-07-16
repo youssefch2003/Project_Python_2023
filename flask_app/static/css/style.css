@@ -1,0 +1,129 @@
+/* Custom CSS for Pet Sitting Service */
+
+body {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f6f6f6;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.navbar-brand:hover {
+    color: #59cbc4;
+}
+
+.container {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+p {
+    color: #555;
+}
+
+ul {
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.card-text {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Optional: Add your own custom styles below */
+
+/* Button styles */
+.btn-primary {
+    background-color: #59cbc4 !important;
+    border-color: #59cbc4 !important;
+}
+
+.btn-primary:hover {
+    background-color: #3eaba3 !important;
+    border-color: #3eaba3 !important;
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(89, 203, 196, 0.5) !important;
+}
+
+/* Pet service options */
+.service-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.service-option img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.service-option span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Customer reviews */
+.customer-review {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-review p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.customer-review p:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+

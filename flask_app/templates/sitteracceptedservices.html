@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitters Available</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link "href="/sitter/new">Become a sitter</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sitters/requests">My requests</a>
+          </li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+
+
+    <div class="container mt-5 p-5">
+            
+                
+                    <div class="mb-3" >
+                    
+                        <a href="/sitters/requests"class="btn btn-light" data-mdb-ripple-color="dark" >Pending Requests</a>
+                        <a href="/sitters/requests/accepted"class="btn btn-light" data-mdb-ripple-color="dark">Accepted Requests</a>
+                        <a href="/sitters/requests/declined" class="btn btn-light" data-mdb-ripple-color="dark">Declined Requests</a>
+                    
+                    </div>
+                
+                <div class="col-md-10">
+                    {% for service in services%}
+                        {% if service.servicet.status == 'accepted'  %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <p class="card-text"> Pet parent name: {{service.user.first_name}} {{service.user.last_name}} </p>
+                                            <p class="card-text"> Pet name: {{service.pet.name}} </p>
+                                            <p>Address:</p>
+                                            <p class="card-text"> State : {{service.address.state}}</p>
+                                            <p class="card-text"> City : {{service.address.city}}</p>
+                                            <p class="card-text"> Street : {{service.address.street}}</p>
+                                            <p class="card-text">Type of pet: {{service.pet.breed}}</p>
+                                            <p class="card-text">
+                                                {%if (service.pet.friendly_pets == 1)%}
+                                                    Friendly with pets
+                                                {%else%}
+                                                    Not friendly with pets
+                                                {%endif%}
+                                            </p>
+                                            <p class="card-text">
+                                                {%if (service.pet.friendly_children == 1)%}
+                                                    Friendly with children
+                                                {%else%}
+                                                    Not friendly with children
+                                                {%endif%}
+                                            </p>
+                                            <p class="card-text">Feeding Schedule:{{service.pet.feeding_times}} {{service.servicet.id}}</p>
+                                            <p class="card-text"> request status : {{service.servicet.status}}</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        {%endif%}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

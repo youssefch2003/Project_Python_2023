@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitters Available</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <style>
+        a {
+    color: #eb5d1e;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #ef7f4d;
+    text-decoration: none;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-primary {
+    font-family: "Raleway", sans-serif;
+  }
+#header {
+    height: 72px;
+    transition: all 0.5s;
+    z-index: 997;
+    transition: all 0.5s;
+    background: #fff;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+#header .logo h1 {
+    font-size: 30px;
+    margin: 0;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 2px;
+  }
+  
+#header .logo h1 a,
+#header .logo h1 a:hover {
+    color: #7a6960;
+    text-decoration: none;
+  }
+  
+#header .logo img {
+    padding: 0;
+    margin: 0;
+    max-height: 40px;
+  }
+  
+#main {
+    margin-top: 72px;
+  }
+  
+  /*--------------------------------------------------------------
+  # Navigation Menu
+  --------------------------------------------------------------*/
+  /**
+  * Desktop Navigation 
+  */
+.navbar {
+    padding: 0;
+  }
+  
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+  
+.navbar li {
+    position: relative;
+  }
+  
+.navbar a,
+.navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+    font-size: 15px;
+    color: #4e4039;
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+  
+.navbar a i,
+.navbar a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+  }
+  
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+    color: #eb5d1e;
+  }
+  
+.navbar .getstarted,
+.navbar .getstarted:focus {
+    background: #eb5d1e;
+    color: #fff;
+    padding: 10px 25px;
+    margin-left: 30px;
+    border-radius: 50px;
+  }
+  
+.navbar .getstarted:hover,
+.navbar .getstarted:focus:hover {
+  color: #fff;
+  background: #ee7843;
+}  
+.btn{
+    color: #fff;
+    background: #ee7843;
+}
+    </style>
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link "href="/sitter/new">Become a sitter</a></li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+                <li><a class="nav-link scrollto"  href="/users/profile">My Pets</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+   
+    <div class="container">
+        <h2>Edit My Pet</h2>
+        <form action="/users/{{one_pet.id}}/update" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" required value="{{one_pet.name}}">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" name="age" required value="{{one_pet.age}}">
+            </div>
+            <div class="form-group">
+                <label>Pet:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="is_dog" value="0"{% if one_pet.is_dog == 0 %}checked{% endif %} required>
+                    <label class="form-check-label">Cat</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="is_dog" value="1"{% if one_pet.is_dog == 1 %}checked{% endif %} required>
+                    <label class="form-check-label">Dog</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="breed">Breed:</label>
+                <input type="text" class="form-control" name="breed" required value="{{one_pet.breed}}">
+            </div>
+
+            <div class="form-group">
+                <label for="friendly_pets">Friendly with other pets:</label>
+                <select class="form-control" name="friendly_pets" required>
+                    <option value="1" {% if one_pet.friendly_pets == 1 %}selected{% endif %}>Yes</option>
+                    <option value="0" {% if one_pet.friendly_pets == 0 %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="friendly_children">Friendly with children:</label>
+                <select class="form-control" name="friendly_children" required>
+                    <option value="1" {% if one_pet.friendly_children == 1 %}selected{% endif %}>Yes</option>
+                    <option value="0" {% if one_pet.friendly_children == 0 %}selected{% endif %}>No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="feeding_time">Feeding time:</label>
+                <textarea class="form-control" name="feeding_times" required>{{one_pet.feeding_times}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="special_requirement">Special requirements:</label>
+                <textarea class="form-control" name="special_requirement">{{one_pet.special_requirement}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

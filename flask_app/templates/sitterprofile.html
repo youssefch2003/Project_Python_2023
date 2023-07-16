@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitters Available</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sitters/requests">My requests</a>
+          </li>
+            <li><a class="nav-link "href="/sitters/{{one_sitter.id}}/edit">edit sitter</a></li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+
+
+    <div class="container mt-5 p-5">
+        <div class="row">
+            <div class="col-6">
+            <!-- <div class="container py-5 h-100"> -->
+              <!-- <div class="row d-flex justify-content-center align-items-center "> -->
+                
+                  <div class="card" style="border-radius: 5px; ;">
+                    <div class="card-body p-4 text-black">
+                      <div class="d-flex align-items-center mb-4">
+                        <div class="flex-shrink-0 p-3">
+                          <img src="{{session['image']}}"
+                            alt="Generic placeholder image" class="img-fluid  border border-dark border-3 "
+                           width="100" height="100">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                          <div class="d-flex flex-row align-items-center mb-2">
+                            <p class="mb-0 me-2 m-3">{{one_user.first_name}} {{one_user.last_name}}</p>
+                            <ul class="mb-0 list-unstyled d-flex flex-row" style="color: #1B7B2C;">
+                              <li>
+                                <i class="fas fa-star fa-xs"></i>
+                              </li>
+                              <li>
+                                <i class="fas fa-star fa-xs"></i>
+                              </li>
+                              <li>
+                                <i class="fas fa-star fa-xs"></i>
+                              </li>
+                              <li>
+                                <i class="fas fa-star fa-xs"></i>
+                              </li>
+                              <li>
+                                <i class="fas fa-star fa-xs"></i>
+                              </li>
+                            </ul>
+                          </div>
+                          <div>
+                           
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <h5 >Services:</h5>
+                      {%if one_sitter.is_boarding == 1%}
+                <p>Boarding price : {{one_sitter.boarding_price}}</p>
+                {%endif%}
+                {%if one_sitter.is_house_sitting == 1%}
+                <p>House sitting price : {{one_sitter.house_sitting_price}}</p>
+                {%endif%}
+                <p class="pb-2">Home type: {{one_sitter.type_home}}</p>
+                <h5 >Availability:</h5>
+                <p>From: {{one_sitter.start_date}}</p>
+                <p>To: {{one_sitter.end_date}}</p>
+                     
+                    </div>
+                  </div>
+                
+           
+            
+        </div>
+        <!-- <h1>{{one_user.first_name}}</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <h4>Services:</h4>
+                {%if one_sitter.is_boarding == 1%}
+                <p>Boarding price : {{one_sitter.boarding_price}}</p>
+                {%endif%}
+
+                {%if one_sitter.is_house_sitting == 1%}
+                <p>House sitting price : {{one_sitter.house_sitting_price}}</p>
+                {%endif%}
+                <p>Home type: {{one_sitter.type_home}}</p>
+                <h4>Availability:</h4>
+                <p>From: {{one_sitter.start_date}}</p>
+                <p>To: {{one_sitter.end_date}}</p>
+            </div> -->
+            <div class="col-6">
+                <h2>{{ sitter_name }}</h2>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">Experience</h4>
+                        <p class="card-text">{{ one_sitter.experience }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">About Yourself</h4>
+                        <p class="card-text">{{ one_sitter.about }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

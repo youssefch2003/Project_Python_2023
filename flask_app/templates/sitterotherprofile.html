@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitter Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search.css') }}">
+    <script>
+        function removeTemporaryReview() {
+            var card = document.querySelector('.rev');
+            card.remove();
+        }
+    </script>
+    <style>
+        .rating {
+    /* display: flex; */
+    /* flex-direction: row-reverse; */
+    justify-content: center
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    width: 1em;
+    font-size: 30px;
+    font-weight: 300;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+.star-rating {
+        color:#ffd600;
+    }
+
+    </style>
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link "href="/sitter/new">Become a sitter</a></li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+
+
+    <div class="container mt-5 p-5">
+
+        
+        <div class="row">
+            <div class="col-3">
+                <!-- <div class="container py-5 h-100"> -->
+                  <!-- <div class="row d-flex justify-content-center align-items-center "> -->
+                    
+                      <div class="card" style="border-radius: 5px; ;">
+                        <div class="card-body p-4 text-black">
+                          <div class="d-flex align-items-center mb-4">
+                            <div class="flex-shrink-0">
+                              <img src="{{session['image']}}"
+                                alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+                                style="width: 70px;">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                              <div class="d-flex flex-row align-items-center mb-2">
+                                <h2 class="mb-0 me-2 m-3">{{one_user.first_name}}</h2>
+                                <ul class="mb-0 list-unstyled d-flex flex-row" style="color: #1B7B2C;">
+                                  <li>
+                                    <i class="fas fa-star fa-xs"></i>
+                                  </li>
+                                  <li>
+                                    <i class="fas fa-star fa-xs"></i>
+                                  </li>
+                                  <li>
+                                    <i class="fas fa-star fa-xs"></i>
+                                  </li>
+                                  <li>
+                                    <i class="fas fa-star fa-xs"></i>
+                                  </li>
+                                  <li>
+                                    <i class="fas fa-star fa-xs"></i>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div>
+                               
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                          <h5 >Services:</h5>
+                          {%if one_sitter.is_boarding == 1%}
+                    <p>Boarding price : {{one_sitter.boarding_price}}</p>
+                    {%endif%}
+                    {%if one_sitter.is_house_sitting == 1%}
+                    <p>House sitting price : {{one_sitter.house_sitting_price}}</p>
+                    {%endif%}
+                    <p class="pb-2">Home type: {{one_sitter.type_home}}</p>
+                    <h5 >Availability:</h5>
+                    <p>From: {{one_sitter.start_date}}</p>
+                    <p>To: {{one_sitter.end_date}}</p>
+                    <div class="col-md-12">
+                        <a href="/users/{{sitter_id}}/contactsitter" class="btn btn-primary">Contact Sitter</a>
+                    </div>    
+                        </div>
+                      </div>
+                    
+               
+                
+            </div>
+            <div class="col-6">
+                <h2>{{ sitter_name }}</h2>
+                
+                <div class="card mb-3">
+                
+                    <div class="card-body">
+                        <h4 class="card-title">Experience</h4>
+                        <p class="card-text">{{ one_sitter.experience }}</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">About Yourself</h4>
+                        <p class="card-text">{{ one_sitter.about }}</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">Reviews</h4>
+                        <!-- Ajoutez ici le code pour afficher les revues existantes -->
+                        
+                            {% for review in reviews %}
+                                <div class="card p-3 mb-2">
+                                    <div class="rating">
+                                        <p>{{ review.content }}</p>
+                                    <h2>
+                                    {% if review.rate is defined %}
+                                        {% for _ in range(review.rate) %}
+                                        <label class="star-rating">★</label>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </h2><br>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="rev col-3">
+            <div id="temporary-review">
+                
+                <h4>Add Review</h4>
+                <form action="/review/{{one_sitter.id}}/create" method="post">
+                    <div class="form-group">
+                        <label for="review-content">Content:</label>
+                        <input type="text" class="form-control" name="content" id="review-content">
+                    </div>
+                    <div class="form-group">
+                        <label for="review-rate">Rate:</label>
+                        <div class="rating"> <input type="radio" name="rate" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rate" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rate" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rate" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rate" value="1" id="1"><label for="1">☆</label>
+                        </div>
+        
+                        <!-- <input type="number" class="form-control" name="rate" id="review-rate" min="1" max="5"> -->
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="removeTemporaryReview()">Remove</button>
+                    <button type="submit"  class="btn btn-primary" >Create</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

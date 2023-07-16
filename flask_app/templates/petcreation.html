@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitters Available</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link "href="/sitter/new">Become a sitter</a></li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+
+
+    <div class="container mt-5 p-5">
+        <h2>Add a Pet</h2>
+        <form action="/users/pet/create" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" name="age" required>
+            </div>
+            <div class="form-group">
+                <label>Pet:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="is_dog" value="0" required checked>
+                    <label class="form-check-label">Cat</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="is_dog" value="1" required>
+                    <label class="form-check-label">Dog</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="breed">Breed:</label>
+                <input type="text" class="form-control" name="breed" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="friendly_pets">Friendly with other pets:</label>
+                <select class="form-control" name="friendly_pets" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="friendly_children">Friendly with children:</label>
+                <select class="form-control" name="friendly_children" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" name="file" id="image" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="feeding_time">Feeding time:</label>
+                <textarea class="form-control" name="feeding_times" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="special_requirement">Special requirements:</label>
+                <textarea class="form-control" name="special_requirement"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

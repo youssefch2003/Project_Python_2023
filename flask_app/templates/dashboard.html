@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitters Available</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <style>
+        .star-rating {
+        color:#ffd600;
+    }
+
+    </style>
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link "href="/sitter/new">Become a sitter</a></li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+                <li><a class="nav-link scrollto"  href="/users/profile">My Pets</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+   
+    <div class="container mt-5 p-5">
+        <div class="row">
+            <div class="col-md-3 mt-4">
+
+
+                <div class="form-group">
+                    <label for="price-filter">Filter by Price:</label>
+                    <select class="form-control" id="price-filter">
+                        <option value="">All</option>
+                        <option value="low">Low to High</option>
+                        <option value="high">High to Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reviews-filter">Filter by Reviews:</label>
+                    <select class="form-control" id="reviews-filter">
+                        <option value="">All</option>
+                        <option value="high">High to Low</option>
+                        <option value="low">Low to High</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <h1>Sitters Available</h1>
+
+                {% for sitter in all_sitters %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/users/{{sitter.details.user_id}}/sitterprofile">{{ sitter.first_name }}</a></h5>
+                        <p> <span  class="text-uppercase">Average Rate:</span>
+                            {% for _ in range (sitter.review.average_rate) %}
+                                <label class="star-rating">★</label>
+                            {% endfor %}
+                            
+                        </p>
+                        <p class="card-text"> <span  class="text-uppercase">Location:</span> {{ sitter.address.state }}, {{ sitter.address.city }}, {{ sitter.address.street }}</p>
+                        <p class="card-text"><span class="text-uppercase">Home Type: </span> {{ sitter.details.type_home }}</p>
+                        <p class="card-text"><span  class="text-uppercase"> Availability: </span> {{ sitter.details.start_date }} - {{ sitter.details.end_date }}</p>
+                        
+                        {% if is_boarding_value == 1 %}
+                            <p class="card-text"><span  class="text-uppercase">Boarding:</span> {{ sitter.details.boarding_price }} TND/DAY</p>
+                        {% endif %}
+                        
+                        {% if is_house_value == 1 %}
+                            <p class="card-text"> <span class="text-uppercase">House sitting:</span> {{ sitter.details.house_sitting_price }} TND/DAY</p>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                {% endfor %}
+            
+                
+                <!-- Add more sitter cards as needed -->
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sitters Available</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link "href="/sitter/new">Become a sitter</a></li>
+            <li><a class="nav-link  "href="/searching">Search for Sitters</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+             
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+
+    <div class="container mt-5 p-5">
+        {%for message in get_flashed_messages()%}
+            <p class="text-danger">{{message}}</p>
+        {%endfor%}
+        <h1>Welcome {{one_user.first_name}}</h1>
+        <h2>Become a Sitter</h2>
+        <form action="/users/sitter/create" method="post">
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" class="form-control" value="{{one_address.state}}" >
+            </div>
+
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" class="form-control" value="{{one_address.city}}" >
+            </div>
+
+            <div class="form-group">
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" class="form-control" value = "{{one_address.street}}" >
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="tel" id="contact" name="contact" class="form-control" value="{{one_user.contact}}" >
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Experience:</label>
+                <textarea id="experience" name="experience" class="form-control" rows="4" cols="50" ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="about">About Yourself:</label>
+                <textarea id="about" name="about" class="form-control" rows="4" cols="50" ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="services">Service Options:</label><br>
+                <div class="form-check">
+                    <input type="checkbox" id="boarding" name="is_boarding" value="1" class="form-check-input">
+                    <label for="boarding" class="form-check-label">Boarding</label>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="boarding_price" class="form-control" >
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="house_sitting" name="is_house_sitting" value="1"
+                        class="form-check-input">
+                    <label for="house_sitting" class="form-check-label">House Sitting</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="house_sitting_price" class="form-control" >
+            </div>
+
+            <div class="form-group">
+                <label for="availability">Availability:</label><br>
+                <input type="date" id="start_date" name="start_date" class="form-control" >
+                <label for="start_date">From</label><br>
+                <input type="date" id="end_date" name="end_date" class="form-control" >
+                <label for="end_date">To</label>
+            </div>
+
+            <div class="form-group">
+                <label for="home_type">Home Type:</label>
+                <select id="home_type" name="type_home" class="form-control">
+                    <option value="house">House</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="farm">Farm</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btnorg ">Create</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

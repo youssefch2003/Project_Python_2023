@@ -1,0 +1,24 @@
+@app.route('/users/register', methods=['post'])
+def register():
+    if not User.validate_user(request.form):
+        return redirect('/')
+    
+    # print("*"*10,request.files['file'].filename ,"*"*10)
+    data={
+        **request.form,
+        'image':User.validate_image(request.files['file'].filename),
+        'password':bcrypt.generate_password_hash(request.form['password'])
+    }
+    # print(data)
+    user_id = User.create_user(data)
+    session['user_id']=user_id
+    
+    #======================================add image
+
+    file = request.files['file']
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash('Image successfully uploaded and displayed below')
+    return redirect('/login')

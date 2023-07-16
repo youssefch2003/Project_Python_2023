@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/register.css">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<div class="bow"> 
+    <form class="p-50 form-signin "action="/users/create" method="post"  enctype="multipart/form-data">
+       
+        <div class="text-center ">
+            {%for message in get_flashed_messages()%}
+                <p class="text-danger">{{message}}</p>
+            {%endfor%}
+            <img class="logo" src="../static/assets/img/logo.png" alt="" width="100" height="80">
+            <h1 class="h3 mb-2 font-weight-normal">sign up</h1>
+            
+        </div> 
+            <div class="d-flex"> <div class="form-group">
+                <input type="text" name="first_name" class="form-control" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+            </div></div>
+       
+            <div class="form-group">
+                <input type="text" name="email" class="form-control"  placeholder="email">
+            </div>
+            <div class="form-group">
+                <input type="text" name="state" class="form-control" placeholder="State">
+            </div>
+            <div class="d-flex"><div class="form-group">
+                <input type="text" name="city" class="form-control"  placeholder="city">
+            </div>
+            <div class="form-group">
+                <input type="text" name="street" class="form-control" placeholder="Street">
+            </div></div>
+            
+            <div class="form-group">
+                <label for="">Phone number</label>
+                <input type="text" name="contact" class="form-control" placeholder="Phone Number">
+            </div>
+            <div class="form-group">
+                <p> add an Image</p>
+                <input type="file" name="file" id="image" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Confirm Password</label>
+                <input type="password" name="confirm_password" class="form-control">
+            </div>
+        <button class="btn btn-lg  btn-block" type="submit">Sign up</button>
+    </form>
+</div> 
+</body>
+</html>

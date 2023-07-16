@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find the Perfect Match</title>
+    <link rel="stylesheet" href="../static/css/search.css">
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+    
+          <div class="logo d-flex">
+            <h1 class="text-light"><a href="index.html"><span>Pet'henni</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+           
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/profile">{{ session['first_name'] }}</a>
+                </li>
+                <!-- Other navigation items -->
+            </ul>
+
+    
+          <nav id="navbar" class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a  href="/users/profile">
+                        <img src="{{session['image']}}" alt="Profile Picture" width="30" height="30"
+                            class="rounded-circle">
+                    </a>
+                </li>
+              <li><a class="nav-link scrollto" href="/users/sitter/profile">Sitter Profile</a></li>
+            <li><a class="nav-link  btn-secondary"href="/sitter/new">Become a sitter</a></li>
+                <li><a class="nav-link scrollto"  href="/users/profile">My Pets</a></li>
+              <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+        </div>
+    </header><!-- End Header -->
+    
+    <div class="d-flex mt-5 p-5">
+        
+            <div class="col-4">
+                <div><h2>requests</h2>
+            {%for service in all_services%}
+
+                <div class="card"> 
+                    <p>Pet Name : {{service.pet.name}} </p>
+                    <p>Status : {{service.status}}</p>
+                    <p>
+                       Sitter Name: <a href="/users/{{service.sitter.id}}/sitterprofile">{{service.sitter.first_name}}</a>
+                    </p>
+                    <p></p>
+                </div>
+            
+            {%endfor%}
+        </div></div>
+      
+        <div class="container col-8">
+            <h1>Find the Perfect Match</h1>
+
+            <form action="/users/sitter/search" method="POST">
+                <div class="form-group">
+                    <label for="">House sitting:</label>
+                    <div class="form-check">
+                        <input type="radio" id="boardingRadio" class="form-check-input" name="is_house_sitting"
+                            value="1" checked>
+                        <label for="boardingRadio" class="form-check-label">yes</label>
+                    </div>
+                    <div class="form-check">
+                        <label for="">No</label>
+                        <input type="radio" id="houseSittingRadio" class="form-check-input" name="is_house_sitting"
+                            value="0">
+
+
+                    </div>
+                    <label for="">Boarding:</label>
+                    <div class="form-check">
+                        <input type="radio" id="boardingRadio" class="form-check-input" name="is_boarding" value="1"
+                            checked>
+                        <label for="boardingRadio" class="form-check-label">yes</label>
+                    </div>
+                    <div class="form-check">
+                        <label for="">No</label>
+                        <input type="radio" id="houseSittingRadio" class="form-check-input" name="is_boarding"
+                            value="0">
+
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Location:</label>
+                    <div class="row">
+                        <div class="col">
+                    <input type="text" class="form-control" name="state" placeholder="State" required></div>
+                    <div class="col">
+                    <input type="text" class="form-control" name="city" placeholder="City" required></div>
+                </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Availability:</label>
+                    <div class="row">
+                        <div class="col">
+                            <label for="startDate">From:</label>
+                            <input type="date" id="startDate" class="form-control" name="start_date" required>
+                        </div>
+                        <div class="col">
+                            <label for="endDate">To:</label>
+                            <input type="date" id="endDate" class="form-control" name="end_date" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Type of Pet:</label>
+                    <div class="form-check">
+                        <input type="radio" id="dogRadio" class="form-check-input" name="pet_type" value="dog" checked>
+                        <label for="dogRadio" class="form-check-label">Dog</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="catRadio" class="form-check-input" name="pet_type" value="cat">
+                        <label for="catRadio" class="form-check-label">Cat</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btnorg btn-lg mt-2">Search</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
